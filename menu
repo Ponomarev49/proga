@@ -1,0 +1,70 @@
+using System;
+namespace basdaun
+{
+    struct  teacher
+    {
+        public string fio;
+        public string birt;
+        public  string org;
+        public string subject;
+        public string[,] book;
+        public teacher(string a, string b, string c, string d,string[,]f)
+        {
+            fio = a;
+            birt = b;
+            org = c;
+            subject = d;
+            book=f;
+        }
+        public void info()
+        {
+            Console.WriteLine($"{fio}\t{birt}\t{org}\t{subject}");
+            for (int i = 0; i < book.GetLength(1); i++)
+            {
+                Console.WriteLine($"{book[i,0]} | {book[i,1]} | {book[i,2]}");
+            }
+        }
+        public static string[,] mass(int n)
+        {
+            string[,] m = new string[n, 3];
+            for (int k = 0; k < n; k++)
+            {
+                Console.WriteLine("Введите дата начала");
+                m[k, 0] = Console.ReadLine();
+                Console.WriteLine("Введите дата конца");
+                m[k, 1] = Console.ReadLine();
+                Console.WriteLine("Введите org");
+                m[k, 2] = Console.ReadLine();
+            }
+            return m;
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Введите колво");
+            int n = Convert.ToInt32(Console.ReadLine());
+            teacher[] teachers = new teacher[n];
+            for (int i = 0; i<n; i++)
+            {
+                Console.WriteLine("Введите фио");
+                string a = Console.ReadLine();
+                Console.WriteLine("Введите дату");
+                string b = Console.ReadLine();
+                Console.WriteLine("Введите орг");
+                string c = Console.ReadLine();
+                Console.WriteLine("Введите предмет");
+                string d = Console.ReadLine();
+                Console.WriteLine("Введите колво организаций");
+                int l = Convert.ToInt32(Console.ReadLine());
+                string[,] f = teacher.mass(l);
+                teachers[i] = new teacher(a,b,c,d,f);
+            }
+            foreach (teacher teacher in teachers)
+            {
+                teacher.info();
+            }
+        }
+    }
+}
