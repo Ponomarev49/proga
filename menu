@@ -1,70 +1,144 @@
 using System;
-namespace basdaun
+using System.Linq;
+namespace menu
 {
-    struct  teacher
-    {
-        public string fio;
-        public string birt;
-        public  string org;
-        public string subject;
-        public string[,] book;
-        public teacher(string a, string b, string c, string d,string[,]f)
-        {
-            fio = a;
-            birt = b;
-            org = c;
-            subject = d;
-            book=f;
-        }
-        public void info()
-        {
-            Console.WriteLine($"{fio}\t{birt}\t{org}\t{subject}");
-            for (int i = 0; i < book.GetLength(1); i++)
-            {
-                Console.WriteLine($"{book[i,0]} | {book[i,1]} | {book[i,2]}");
-            }
-        }
-        public static string[,] mass(int n)
-        {
-            string[,] m = new string[n, 3];
-            for (int k = 0; k < n; k++)
-            {
-                Console.WriteLine("Введите дата начала");
-                m[k, 0] = Console.ReadLine();
-                Console.WriteLine("Введите дата конца");
-                m[k, 1] = Console.ReadLine();
-                Console.WriteLine("Введите org");
-                m[k, 2] = Console.ReadLine();
-            }
-            return m;
-        }
-    }
     class Program
     {
-        static void Main(string[] args)
+        public static int n;
+        static void Main()
         {
+            bool rgrka = true;
+            while (rgrka)
+            {
+                rgrka = MainMenu();
+            }
+        }
+        public static bool MainMenu()
+        {
+
+            Console.Clear();
+            Console.WriteLine("Меню");
+            Console.WriteLine("1) Добавить учителя");
+            Console.WriteLine("2) Выбрать учителей по предмету");
+            Console.WriteLine("3) Выбрать учителей по стажу работы в последней организации");
+            Console.WriteLine("4) Показать всех учителей");
+            Console.WriteLine("5) Выход");
+            Console.Write("\r\nВыберите действие: ");
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    Hello();
+                    return true;
+                case "2":
+                    if (n > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("В базе данных нет учителей");
+                        return false;
+                    }
+                case "3":
+                    if (n > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("В базе данных нет учителей");
+                        return false;
+                    }
+                case "4":
+                    if (n > 0)
+                    {
+                        print(teacher);
+                        return true;
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("В базе данных нет учителей");
+                        return false;
+                    }
+                case "5":
+                    return false;
+                default:
+                    return true;
+            }
+        }
+        struct teacher
+        {
+            public string fio;
+            public string birt;
+            public string org;
+            public string subject;
+            public string[,] book;
+            public teacher(string a, string b, string c, string d, string[,] f)
+            {
+                fio = a;
+                birt = b;
+                org = c;
+                subject = d;
+                book = f;
+            }
+            public void info()
+            {
+                Console.WriteLine($"{fio}\t{birt}\t{org}\t{subject}");
+                for (int s = 0; s < book.GetLength(0); s++)
+                {
+                    Console.WriteLine($"{book[s, 0]} | {book[s, 1]} | {book[s, 2]}");
+                }
+            }
+            public static string[,] mass(int n)
+            {
+                string[,] m = new string[n, 3];
+                for (int k = 0; k < n; k++)
+                {
+                    Console.WriteLine("Введите дата начала");
+                    m[k, 0] = Console.ReadLine();
+                    Console.WriteLine("Введите дата конца");
+                    m[k, 1] = Console.ReadLine();
+                    Console.WriteLine("Введите org");
+                    m[k, 2] = Console.ReadLine();
+                }
+                return m;
+            }
+        }
+
+        public static void print(string[] a)
+        {
+            for (int s = 0; s < a.GetLength(0); s++)
+            {
+                Console.WriteLine($"{a[s]}");
+            }
+        }
+
+        public static void Hello() 
+        {
+            Console.Clear();
             Console.WriteLine("Введите колво");
-            int n = Convert.ToInt32(Console.ReadLine());
-            teacher[] teachers = new teacher[n];
-            for (int i = 0; i<n; i++)
+            int l= Convert.ToInt32(Console.ReadLine());
+            teacher[] teachers =  new teacher[n];
+            for (int i = n; i < n; i++)
             {
                 Console.WriteLine("Введите фио");
                 string a = Console.ReadLine();
-                Console.WriteLine("Введите дату");
-                string b = Console.ReadLine();
-                Console.WriteLine("Введите орг");
-                string c = Console.ReadLine();
-                Console.WriteLine("Введите предмет");
-                string d = Console.ReadLine();
-                Console.WriteLine("Введите колво организаций");
-                int l = Convert.ToInt32(Console.ReadLine());
-                string[,] f = teacher.mass(l);
-                teachers[i] = new teacher(a,b,c,d,f);
+                Console.WriteLine("Введите дату"); 
+                string b = Console.ReadLine(); 
+                Console.WriteLine("Введите орг"); 
+                string c2 = Console.ReadLine(); 
+                Console.WriteLine("Введите предмет"); 
+                string d = Console.ReadLine(); 
+                Console.WriteLine("Введите колво организаций"); 
+                string[,] f = teacher.mass(Convert.ToInt32(Console.ReadLine())); 
+                teachers[i] = new teacher(a, b, c2, d, f);
             }
-            foreach (teacher teacher in teachers)
-            {
-                teacher.info();
-            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
         }
+        
     }
 }
