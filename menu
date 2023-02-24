@@ -1,11 +1,23 @@
 using System;
 namespace menu
 {
-    class Program
+    struct teacher
     {
-        public static int n;
-        public static string[,] people;
-        public static string[][,] book;
+        public  static string fio;
+        public  static string birt;
+        public  static string org;
+        public  static string subject;
+        public  static string[,] book;
+        public  static int n;
+        public  static teacher[] teachers;
+        public teacher(string a, string b, string c, string d, string[,] f)
+        {
+            fio = a;
+            birt = b;
+            org = c;
+            subject = d;
+            book = f;
+        }
         static void Main()
         {
             bool rgrka = true;
@@ -33,7 +45,7 @@ namespace menu
                 case "2":
                     if (n > 0)
                     {
-                        subject(people);
+                        subjects();
                         return true;
                     }
                     else
@@ -45,7 +57,7 @@ namespace menu
                 case "3":
                     if (n > 0)
                     {
-                        work(people, book);
+                        work();
                         return true;
                     }
                     else
@@ -57,7 +69,7 @@ namespace menu
                 case "4":
                     if (n > 0)
                     {
-                        info(people);
+                        info();
                         return true;
                     }
                     else
@@ -77,72 +89,79 @@ namespace menu
             Console.Clear();
             Console.WriteLine("Введите колво");
             n = Convert.ToInt32(Console.ReadLine());
-            people = new string[n,3];
-            book = new string[n][,];
+            teachers = new teacher[n];
             for (int i = 0; i < n; i++)
             {
                 Console.WriteLine("Введите фио");
-                people[i,0]=Console.ReadLine();
+                string a=Console.ReadLine();
                 Console.WriteLine("Введите дату рождения(день.месяц.год)"); 
-                people[i,1]=Console.ReadLine();
+                string b=Console.ReadLine();
+                Console.WriteLine("Введите орг"); 
+                string c=Console.ReadLine();
                 Console.WriteLine("Введите предмет"); 
-                people[i,2]=Console.ReadLine();
+                string d=Console.ReadLine();
                 Console.WriteLine("Введите колво организаций"); 
                 int l = Convert.ToInt32(Console.ReadLine());
-                book[i] = new string[l, 3];
-                for (int k = 0; k < l; k++)
-                {
-                    Console.WriteLine("Введите дату поступления(день.месяц.год)");
-                    book[i][k, 0] = Console.ReadLine();
-                    Console.WriteLine("Введите организацию");
-                    book[i][k, 1] = Console.ReadLine();
-                    Console.WriteLine("Введите дату увольнения(день.месяц.год)");
-                    book[i][k, 2] = Console.ReadLine();
-                }
+                string[,]f=mass(l);
+                teachers[i] = new teacher(a, b, c, d, f);
                 Console.Clear();
             }
             Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
             Console.ReadLine();
         }
-        public static void subject(string[,]a)
+        public static void subjects()
         {
             Console.Clear();
             Console.Write("По какому предмету выбрать учителей? ");
             string f=Console.ReadLine();
-            for (int i = 0; i < a.GetLength(0); i++)
+            foreach (teacher teacher in teachers)
             {
-                if (f==a[i,2]) Console.WriteLine(a[i,0]);
+                if(f==subject) Console.WriteLine(fio);
             }
             Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
             Console.ReadLine();
         }
-        public static void work(string[,]a,string[][,] b)
+        public static void work()
         {
             Console.Clear();
             Console.Write("Введите сколько должен работать учитель в формате лет,месяцев,дней ");
             string f=Console.ReadLine();
             string[] data = f.Split(',');
-            for (int i = 0; i < b.GetLength(0); i++)
+            foreach (teacher teacher in teachers)
             {
-                string[] data1 = b[i][b.GetLength(1)-1,0].Split('.');
-                string[] data2 = b[i][b.GetLength(1)-1,2].Split('.');
+                string[] data1 = book[book.GetLength(0)-1,0].Split('.');
+                string[] data2 = book[book.GetLength(0)-1,2].Split('.');
                 int dat = Convert.ToInt32(data[0]) * 360 + Convert.ToInt32(data[1]) * 30 + Convert.ToInt32(data[2]);
                 int dat1 = Convert.ToInt32(data1[2]) * 360 + Convert.ToInt32(data1[1]) * 30 + Convert.ToInt32(data1[0]);
                 int dat2 = Convert.ToInt32(data2[2]) * 360 + Convert.ToInt32(data2[1]) * 30 + Convert.ToInt32(data2[0]);
-                if (dat<dat1+dat2) Console.WriteLine(a[i,0]);
+                if (dat==dat2-dat1) Console.WriteLine(fio);
             }
             Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
             Console.ReadLine();
         }
-        public static void info(string[,]a)
+        public static void info()
         {
             Console.Clear();
-            for (int i = 0; i < a.GetLength(0); i++)
+            foreach (teacher teacher in teachers)
             {
-                Console.WriteLine(a[i,0]);
+                Console.WriteLine(fio);
             }
             Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
             Console.ReadLine();
+        }
+        public static string[,] mass(int l)
+        {
+            string[,] m = new string[l, 3];
+            for (int k = 0; k < l; k++)
+            {
+                Console.WriteLine("Введите дату поступления(день.месяц.год)");
+                m[k, 0] = Console.ReadLine();
+                Console.WriteLine("Введите организацию");
+                m[k, 1] = Console.ReadLine();
+                Console.WriteLine("Введите дату увольнения(день.месяц.год)");
+                m[k, 2] = Console.ReadLine();
+            }
+            return m;
         }
     }
 }
