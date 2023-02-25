@@ -1,22 +1,22 @@
 using System;
 namespace menu
 {
-    struct teacher
+    class teacher
     {
-        public  static string fio;
-        public  static string birt;
-        public  static string org;
-        public  static string subject;
-        public  static string[,] book;
-        public  static int n;
-        public  static teacher[] teachers;
-        public teacher(string a, string b, string c, string d, string[,] f)
+        string fio;
+        string birt;
+        string org;
+        string subject;
+        string[,] book;
+        static int n;
+        static teacher[] teachers;
+        public teacher(string fio, string birt, string org, string subject, string[,] book)
         {
-            fio = a;
-            birt = b;
-            org = c;
-            subject = d;
-            book = f;
+            this.fio = fio;
+            this.birt = birt;
+            this.org = org;
+            this.subject = subject;
+            this.book = book;
         }
         static void Main()
         {
@@ -116,12 +116,12 @@ namespace menu
             string f=Console.ReadLine();
             foreach (teacher teacher in teachers)
             {
-                if(f==subject) Console.WriteLine(fio);
+                if(f==teacher.subject) Console.WriteLine(teacher.fio);
             }
             Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
             Console.ReadLine();
         }
-        public static void work()
+        public  static void work()
         {
             Console.Clear();
             Console.Write("Введите сколько должен работать учитель в формате лет,месяцев,дней ");
@@ -129,12 +129,12 @@ namespace menu
             string[] data = f.Split(',');
             foreach (teacher teacher in teachers)
             {
-                string[] data1 = book[book.GetLength(0)-1,0].Split('.');
-                string[] data2 = book[book.GetLength(0)-1,2].Split('.');
+                string[] data1 = teacher.book[teacher.book.GetLength(0)-1,0].Split('.');
+                string[] data2 = teacher.book[teacher.book.GetLength(0)-1,2].Split('.');
                 int dat = Convert.ToInt32(data[0]) * 360 + Convert.ToInt32(data[1]) * 30 + Convert.ToInt32(data[2]);
                 int dat1 = Convert.ToInt32(data1[2]) * 360 + Convert.ToInt32(data1[1]) * 30 + Convert.ToInt32(data1[0]);
                 int dat2 = Convert.ToInt32(data2[2]) * 360 + Convert.ToInt32(data2[1]) * 30 + Convert.ToInt32(data2[0]);
-                if (dat==dat2-dat1) Console.WriteLine(fio);
+                if (dat==dat2-dat1) Console.WriteLine(teacher.fio);
             }
             Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
             Console.ReadLine();
@@ -144,12 +144,12 @@ namespace menu
             Console.Clear();
             foreach (teacher teacher in teachers)
             {
-                Console.WriteLine(fio);
+                Console.WriteLine(teacher.fio);
             }
             Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
             Console.ReadLine();
         }
-        public static string[,] mass(int l)
+        public  static string[,] mass(int l)
         {
             string[,] m = new string[l, 3];
             for (int k = 0; k < l; k++)
