@@ -1,0 +1,75 @@
+import math
+
+def min_row(mas):
+    mn=math.inf
+    for i in range(1 ,len(mas)):
+        if mas[i] < mn:
+            mn = mas[i]
+    return mn
+
+def min_column(a):
+    mn = math.inf
+    for i in range(1, n):
+        if mas1[i][a] < mn:
+            mn = mas1[i][a]
+    return mn
+
+distance = 0
+peaks = []
+
+print('Введите кол-во вершин')
+n = int(input())+1
+mas = [math.inf] * n
+mas1 = [math.inf] * n
+for i in range(n):
+    mas[i] = [math.inf] * n
+    mas1[i] = [math.inf] * n
+
+mas[1][0]=1
+mas[0][1]=1
+mas1[1][0]=1
+mas1[0][1]=1
+for l in range(2,n):
+    mas[l][0]=1+mas[l-1][0]
+    mas[0][l]=1+mas[0][l-1]
+    mas1[l][0] = 1 + mas[l - 1][0]
+    mas1[0][l] = 1 + mas[0][l - 1]
+
+print('Введите кол-во ребер')
+k=int(input())
+for f in range(1,k+1):
+    print(f'Введите начало {f} ребра')
+    start = int(input())
+    print(f'Введите конец {f} ребра')
+    end = int(input())
+    print(f'Введите вес {f} ребра')
+    mas[start][end] = int(input())
+    print(f'{f} ребро ориентированное?(yes/no)')
+    if input() == 'no':
+        mas[end][start] = mas[start][end]
+
+print('Выбирете начальную точку')
+curr_index=int(input())
+print('Выбирете конечную точку')
+last=int(input())
+
+for i in range(1,n):
+    mas1[curr_index][i]=distance+mas[curr_index][i]
+
+distance=min_row(mas1[curr_index])
+curr_index=mas1[curr_index].index(min_row(mas1[curr_index]))
+peaks.append(curr_index)
+
+while last not in peaks:
+    for i in range(1,n):
+        mas1[curr_index][i]=distance+mas[curr_index][i]
+    for i in range(1,n):
+        if i in peaks:
+            mas1[curr_index][i]=math.inf
+        else:
+            mas1[curr_index][i]=min_column(i)
+    distance=min_row(mas1[curr_index])
+    curr_index=mas1[curr_index].index(min_row(mas1[curr_index]))
+    peaks.append(curr_index)
+
+print(min_column(last))
