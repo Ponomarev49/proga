@@ -1,0 +1,174 @@
+using System;
+using System.ComponentModel;
+
+namespace menu
+{
+    class teacher
+    {
+        static void Main()
+        {
+
+            bool rgrka = true;
+            while (rgrka)
+            {
+                rgrka = MainMenu();
+            }
+        }
+        public static bool MainMenu()
+        {
+            int[] mas = {10,5,4,-2,7,33,1,1 };
+            Console.Clear();
+            Console.WriteLine("Меню");
+            Console.WriteLine("1) Resize");
+            Console.WriteLine("2) Размер массива");
+            Console.WriteLine("3) Очистить массив");
+            Console.WriteLine("4) нахождение");
+            Console.WriteLine("5) нахождение всего");
+            Console.WriteLine("6) ранки");
+            Console.WriteLine("7) нахождение индекса");
+            Console.WriteLine("8) нахождение последнего индекса");
+            Console.WriteLine("9) реверсилка");
+            Console.WriteLine("10) сортироука");
+            Console.Write("\r\nВыберите действие: ");
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    resize(mas);
+                    return true;
+                
+                case "2":
+                    dlina(mas);
+                    return true;
+                
+                case "3":
+                    chisto(mas);
+                    return true;
+                case "4":
+                    находка(mas);
+                    return true;
+                case "5":
+                    находка_all(mas);
+                    return true;
+                case "6":
+                    ранки(mas);
+                    return true;
+                case "7":
+                    находка_индекс(mas);
+                    return true;
+                case "8":
+                    находка_индекс_ласт(mas);
+                    return true;
+                case "9":
+                    реверсе(mas);
+                    return true;
+                case "10":
+                    сортироука(mas);
+                    return true;
+                default:
+                    return true;
+                
+            }
+        }
+
+        public static void resize(int[] mas)
+        {
+            Console.Clear();
+            int[] copy = new int[mas.Length];
+            mas.CopyTo(copy, 0); 
+            Array.Resize(ref copy,4);
+            for (int i = 0; i < copy.Length; i++)
+            {
+                Console.WriteLine(copy[i]);
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+
+        public static void dlina(int[] mas)
+        {
+            Console.Clear();
+            Console.WriteLine(mas.Length);
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+
+        public static void chisto(int[] mas)
+        {
+            Console.Clear();
+            Array.Clear(mas,0,7);
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+            
+        }
+
+        public static void находка(int[] mas)
+        {
+            Console.Clear();
+            int f = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine(Array.Find(mas,  element=> element==f));
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void находка_all(int[] mas)
+        {
+            Console.Clear();
+            int f = Convert.ToInt32(Console.ReadLine());
+            int[] all= Array.FindAll(mas,  element=> element==f);
+            for (int i = 0; i < all.Length; i++)
+            {
+                Console.WriteLine(all[i]);
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void ранки(int[] mas)
+        {
+            Console.Clear();
+            Console.WriteLine(mas.Rank);
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void находка_индекс(int[] mas)
+        {
+            Console.Clear();
+            int f = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine(Array.FindIndex(mas,  element=> element==f));
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void находка_индекс_ласт(int[] mas)
+        {
+            Console.Clear();
+            int f = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine(Array.FindLastIndex(mas,  element=> element==f));
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void реверсе(int[] mas)
+        {
+            Console.Clear();
+            int[] copy = new int[mas.Length];
+            mas.CopyTo(copy, 0);
+            Array.Reverse(copy);
+            for (int i = 0; i < copy.Length; i++)
+            {
+                Console.WriteLine(copy[i]);
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void сортироука(int[] mas)
+        {
+            Console.Clear();
+            int[] copy = new int[mas.Length];
+            mas.CopyTo(copy, 0);
+            Array.Sort(copy);
+            for (int i = 0; i < copy.Length; i++)
+            {
+                Console.WriteLine(copy[i]);
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+    }
+}
