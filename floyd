@@ -1,0 +1,35 @@
+import math
+print('Введите кол-во вершин')
+n = int(input())+1
+mas = [math.inf] * n
+for i in range(n):
+    mas[i] = [math.inf] * n
+
+mas[1][0] = 1
+mas[0][1] = 1
+mas[0][0] = ''
+for t in range(2, n):
+    mas[t][0] = 1+mas[t-1][0]
+    mas[0][t] = 1+mas[0][t-1]
+for f in range(1, n):
+    mas[f][f] = 0
+print('Введите кол-во ребер')
+k = int(input())
+for f in range(1, k+1):
+    print(f'Введите начало {f} ребра')
+    start = int(input())
+    print(f'Введите конец {f} ребра')
+    end = int(input())
+    print(f'Введите вес {f} ребра')
+    mas[start][end] = int(input())
+    print(f'{f} ребро ориентированное?(yes/no)')
+    if input() == 'no':
+        mas[end][start] = mas[start][end]
+for k in range(1, n):
+    for l in range(1, n):
+        for r in range(1, n):
+            mas[l][r] = min(mas[l][k]+mas[k][r], mas[l][r])
+for i in range(len(mas)):
+    for j in range(len(mas)):
+        print(mas[i][j], end='\t')
+    print('\n')
