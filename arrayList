@@ -1,0 +1,198 @@
+using System;
+using System.Collections;
+using System.ComponentModel;
+
+namespace menu
+{
+    class teacher
+    {
+        static void Main()
+        {
+
+            bool rgrka = true;
+            while (rgrka)
+            {
+                rgrka = MainMenu();
+            }
+        }
+        public static bool MainMenu()
+        {
+            ArrayList list = new ArrayList(){1,2,"hello", -4,"4","семь"};
+            Console.Clear();
+            Console.WriteLine("Меню");
+            Console.WriteLine("1.1) добавка числа");
+            Console.WriteLine("1.2) добавка строки");
+            Console.WriteLine("2) Размер листа");
+            Console.WriteLine("3) Очистить лист");
+            Console.WriteLine("4) нахождение");
+            Console.WriteLine("5) последнее нахождение");
+            Console.WriteLine("6) репит");
+            Console.WriteLine("7) контейнерс");
+            Console.WriteLine("8) инсерт");
+            Console.WriteLine("9) реверсилка");
+            Console.WriteLine("10) сортироука");
+            Console.Write("\r\nВыберите действие: ");
+            switch (Console.ReadLine())
+            {
+                case "1.1":
+                    добавка_число(list);
+                    return true;
+                case "1.2":
+                    добавка_строка(list);
+                    return true;
+                case "2":
+                    dlina(list);
+                    return true;
+                case "3":
+                    chisto(list);
+                    return true;
+                case "4":
+                    находка(list);
+                    return true;
+                case "5":
+                    находка_ласт(list);
+                    return true;
+                case "6":
+                    репит();
+                    return true;
+                case "7":
+                    контейнерс(list);
+                    return true;
+                case "8":
+                    инсерт(list);
+                    return true;
+                case "9":
+                    реверсе(list);
+                    return true;
+                case "10":
+                    сортироука(list);
+                    return true;
+                default:
+                    return true;
+                
+            }
+        }
+
+        public static void добавка_число(ArrayList list)
+        {
+            Console.Clear();
+            list.Add(Convert.ToInt32(Console.ReadLine()));
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void добавка_строка(ArrayList list)
+        {
+            Console.Clear();
+            list.Add(Console.ReadLine());
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+
+        public static void dlina(ArrayList list)
+        {
+            Console.Clear();
+            Console.WriteLine(list.Count);
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+
+        public static void chisto(ArrayList list)
+        {
+            Console.Clear();
+            list.Clear();
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+            
+        }
+
+        public static void находка(ArrayList list)
+        {
+            Console.Clear();
+            int f = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine(list.IndexOf(list,  f));
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void находка_ласт(ArrayList list)
+        {
+            Console.Clear();
+            int f = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine(list.LastIndexOf(list, f));
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void репит()
+        {
+            Console.Clear();
+            Console.Write("Введите строку, из которой будет состоять ArrayList");
+            string a = Console.ReadLine();
+            Console.Write("Введите колво элементов ArrayList");
+            int l=Convert.ToInt32(Console.ReadLine());
+            ArrayList al = ArrayList.Repeat( a, l );
+            foreach (var element  in al)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void контейнерс(ArrayList list)
+        {
+            Console.Clear();
+            Console.Write("Введите элемент");
+            int f = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine(list.Contains(f));
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void инсерт(ArrayList list)
+        {
+            Console.Clear();
+            Console.Write("Введите элемент ");
+            int el = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Введите индекс");
+            int index = Convert.ToInt32(Console.ReadLine());
+            list.Insert(el, index);
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void реверсе(ArrayList list)
+        {
+            Console.Clear();
+            list.Reverse();
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void сортироука(ArrayList list)
+        {
+            Console.Clear();
+            list.Sort();
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+    }
+}
