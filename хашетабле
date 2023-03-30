@@ -1,0 +1,176 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Collections;
+
+namespace menu
+{
+    class teacher
+    {
+        static void Main()
+        {
+
+            bool rgrka = true;
+            while (rgrka)
+            {
+                rgrka = MainMenu();
+            }
+        }
+        public static bool MainMenu()
+        {
+            // Create a new hash table.
+            //
+            Hashtable list = new Hashtable();
+            // Add some elements to the hash table. There are no
+            // duplicate keys, but some of the values are duplicates.
+            list.Add("txt", "notepad.exe");
+            list.Add("bmp", "paint.exe");
+            list.Add("dib", "paint.exe");
+            list.Add("rtf", "wordpad.exe");
+            // The Add method throws an exception if the new key is
+            // already in the hash table.
+            Console.Clear();
+            Console.WriteLine("Меню");
+            Console.WriteLine("1) добавка");
+            Console.WriteLine("2) Размер листа");
+            Console.WriteLine("3) Очистить лист");
+            Console.WriteLine("4) вывод");
+            Console.WriteLine("5) последнее нахождение");
+            Console.WriteLine("6) копировка");
+            Console.WriteLine("7) контейнерс");
+            Console.WriteLine("8) инсерт");
+            Console.WriteLine("9) ключики");
+            Console.WriteLine("10) сортироука");
+            Console.Write("\r\nВыберите действие: ");
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    добавка(list);
+                    return true;
+                case "2":
+                    dlina(list);
+                    return true;
+                case "3":
+                    chisto(list);
+                    return true;
+                case "4":
+                    вывод(list);
+                    return true;
+                case "5":
+                    контейнерс_ключи_от_дома(list);
+                    return true;
+                case "6":
+                    Копировка(list);
+                    return true;
+                case "7":
+                    контейнерс__дома(list);
+                    return true;
+                case "8":
+                    ремуве(list);
+                    return true;
+                case "9":
+                    ключики(list);
+                    return true;
+                case "10":
+                    гет_тапе(list);
+                    return true;
+                default:
+                    return true;
+
+            }
+        }
+
+        public static void добавка(Hashtable list)
+        {
+            Console.Clear();
+            Console.WriteLine("Введите ключ, значение");
+            var key = Console.ReadLine();
+            var value = Console.ReadLine();
+            list.Add(key, value);
+            вывод(list);
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void dlina(Hashtable list)
+        {
+            Console.Clear();
+            Console.WriteLine(list.Count);
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void chisto(Hashtable list)
+        {
+            Console.Clear();
+            list.Clear();
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void контейнерс_ключи_от_дома(Hashtable list)
+        {
+            Console.Clear();
+            Console.Write("Введите элемент");
+            Console.WriteLine(list.Contains(Convert.ToInt32(Console.ReadLine())));
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void контейнерс__дома(Hashtable list)
+        {
+            Console.Clear();
+            Console.Write("Введите элемент");
+            Console.WriteLine(list.ContainsValue(Convert.ToInt32(Console.ReadLine())));
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+
+        public static void ремуве(Hashtable list)
+        {
+            Console.Clear();
+            Console.Write("Введите ключ");
+            string f = Console.ReadLine();
+            list.Remove(f);
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void гет_тапе(Hashtable list)
+        {
+            Console.Clear();
+            Console.WriteLine(list.GetType());
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void вывод(Hashtable list)
+        {
+            Console.Clear();
+            foreach (var element in list.Keys)
+            {
+                Console.WriteLine(element + " friends is " + list[element]);
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void Копировка(Hashtable list)
+        {
+            Console.Clear();
+            string[] mass = new string[10];
+            Console.WriteLine("Введите начало копирования");
+            int arrayind = Convert.ToInt32(Console.ReadLine());
+            list.Keys.CopyTo(mass, arrayind);
+            for (int i = 0; i < mass.Length; i++) Console.WriteLine(mass[i]);
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void ключики(Hashtable list)
+        {
+            Console.Clear();
+            ICollection Key = list.Keys;
+            foreach (var element in Key)
+            {
+                Console.WriteLine(element);
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+    }
+}
