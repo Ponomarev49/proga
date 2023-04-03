@@ -1,0 +1,178 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+
+namespace menu
+{
+    class teacher
+    {
+        static void Main()
+        {
+
+            bool rgrka = true;
+            while (rgrka)
+            {
+                rgrka = MainMenu();
+            }
+        }
+        public static bool MainMenu()
+        {
+            var employees = new List<string> { "Tom", "Sam", "Bob" };
+            Queue<string> list = new Queue<string>(employees);
+            Console.Clear();
+            Console.WriteLine("Меню");
+            Console.WriteLine("1) добавка строки");
+            Console.WriteLine("2) Размер листа");
+            Console.WriteLine("3) Очистить лист");
+            Console.WriteLine("4) нахождение");
+            Console.WriteLine("5) последнее нахождение");
+            Console.WriteLine("6) репит");
+            Console.WriteLine("7) контейнерс");
+            Console.WriteLine("8) ктокрайний не удаляет");
+            Console.WriteLine("9) реверсилка");
+            Console.WriteLine("10) сортироука");
+            Console.Write("\r\nВыберите действие: ");
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    добавка_строка(list);
+                    return true;
+                case "2":
+                    dlina(list);
+                    return true;
+                case "3":
+                    chisto(list);
+                    return true;
+                case "4":
+                    копировка(list);
+                    return true;
+                case "5":
+                    тустринг(list);
+                    return true;
+                case "6":
+                    репит();
+                    return true;
+                case "7":
+                    контейнерс(list);
+                    return true;
+                case "8":
+                    ктокрайний(list);
+                    return true;
+                case "9":
+                    реверсе(list);
+                    return true;
+                case "10":
+                    сортироука(list);
+                    return true;
+                default:
+                    return true;
+                
+            }
+        }
+        
+        public static void добавка_строка(Queue<string> list)
+        {
+            Console.Clear();
+            list.Enqueue("Пуртов");
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+
+        public static void dlina(Queue<string> list)
+        {
+            Console.Clear();
+            Console.WriteLine(list.Count);
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+
+        public static void chisto(Queue<string> list)
+        {
+            Console.Clear();
+            list.Clear();
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+            
+        }
+
+        public static void копировка(Queue<string> list)
+        {
+            Console.Clear();
+            Queue<string> queueCopy = new Queue<string>(list.ToArray());
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void тустринг(Queue<string> list)
+        {
+            Console.Clear();
+            string f = Console.ReadLine();
+            Console.WriteLine(list.ToString());
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void репит()
+        {
+            Console.Clear();
+            Console.Write("Введите строку, из которой будет состоять ArrayList");
+            string a = Console.ReadLine();
+            Console.Write("Введите колво элементов ArrayList");
+            int l=Convert.ToInt32(Console.ReadLine());
+            ArrayList al = ArrayList.Repeat( a, l );
+            foreach (var element  in al)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void контейнерс(Queue<string> list)
+        {
+            Console.Clear();
+            Console.Write("Введите элемент");
+            string f = Console.ReadLine();;
+            Console.WriteLine(list.Contains(f));
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void ктокрайний(Queue<string> list)
+        {
+            Console.Clear();
+            Console.WriteLine(list.Peek());
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void реверсе(Queue<string> list)
+        {
+            Console.Clear();
+            list.Reverse();
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void сортироука(Queue<string> list)
+        {
+            
+            Console.Clear();
+            list.Dequeue();
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+    }
+}
