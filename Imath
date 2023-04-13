@@ -1,0 +1,80 @@
+using System;
+namespace deligates
+{
+    interface IMath
+    {
+        int summa(int x, int y);
+        int proiz(int x, int y);
+        int del(int x, int y);
+
+    }
+
+    public class Action : IMath
+    {
+        public int summa(int x, int y)
+        {
+            return x + y;
+        }
+
+        public int proiz(int x, int y)
+        {
+            return x * y;
+        }
+
+        public int del(int x, int y)
+        {
+            return x / y;
+        }
+    }
+
+    class Program
+    {
+        delegate int Math(int x, int y);
+
+        static Action mathClass = new Action();
+
+        public static void Main()
+        {
+            int x;
+            int y;
+            Math math;
+            Console.Clear();
+            Console.WriteLine("меню");
+            Console.WriteLine("1)сумма");
+            Console.WriteLine("2)умножение");
+            Console.WriteLine("3)деление");
+            Console.Write("\r\nВыберите действие: ");
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    Console.Clear();
+                    math = mathClass.summa;
+                    Console.WriteLine("Введите первое число:");
+                    x = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Введите второе число:");
+                    y = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine(math(x, y));
+                    break;
+                case "2":
+                    Console.Clear();
+                    math = mathClass.proiz;
+                    Console.WriteLine("Введите первое число:");
+                    x = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Введите второе число:");
+                    y = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine(math(x, y));
+                    break;
+                case "3":
+                    Console.Clear();
+                    math = mathClass.del;
+                    Console.WriteLine("Введите первое число:");
+                    x = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Введите второе число:");
+                    y = Convert.ToInt32(Console.ReadLine());
+                    if (y == 0) Console.WriteLine("На ноль низя делить");
+                    else Console.WriteLine(math(x, y));
+                    break;
+            }
+        }
+    }
+}
