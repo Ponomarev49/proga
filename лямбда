@@ -1,0 +1,101 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Xml.Schema;
+
+namespace deligates
+{
+    class Program
+    {
+        delegate int Math(int number_1, int number_2, int number_3);
+        public static void Main()
+        {
+            Math math;
+            int result;
+            int number_1;
+            int number_2;
+            int number_3;
+            Console.Clear();
+            Console.WriteLine("меню");
+            Console.WriteLine("1)сумма");
+            Console.WriteLine("2)умножение");
+            Console.WriteLine("3)мин");
+            Console.WriteLine("4)макс");
+            Console.WriteLine("5)среднее");
+            Console.Write("\r\nВыберите действие: ");
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    Console.Clear();
+                    Console.WriteLine("Введите первое число:");
+                    number_1 = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Введите второе число:");
+                    number_2 = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Введите третье число:");
+                    number_3 = Convert.ToInt32(Console.ReadLine());
+                    math = (x, y, z) => x + y + z;
+                    result = math(number_1, number_2, number_3);
+                    Console.WriteLine(result);
+                    break;
+                case "2":
+                    Console.Clear();
+                    Console.WriteLine("Введите первое число:");
+                    number_1 = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Введите второе число:");
+                    number_2 = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Введите третье число:");
+                    number_3 = Convert.ToInt32(Console.ReadLine());
+                    math = (x, y, z) => x * y * z;
+                     result = math(number_1, number_2, number_3);
+                    Console.WriteLine(result);
+                    break;
+                case "3":
+                    Console.Clear();
+                    Console.WriteLine("Введите первое число:");
+                    number_1 = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Введите второе число:");
+                    number_2 = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Введите третье число:");
+                    number_3 = Convert.ToInt32(Console.ReadLine());
+                    math = (x, y, z) =>
+                    {
+                        int[] mas = { x, y, z };
+                        result = mas.Min();
+                        return result;
+                    };
+                    result = math(number_1, number_2, number_3);
+                    Console.WriteLine(result);
+                    break;
+                case "4":
+                    Console.Clear();
+                    Console.WriteLine("Введите первое число:");
+                    number_1 = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Введите второе число:");
+                    number_2 = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Введите третье число:");
+                    number_3 = Convert.ToInt32(Console.ReadLine());
+                    math = (x, y, z) =>
+                    {
+                        int[] mas = { x, y, z };
+                        result = mas.Max();
+                        return result;
+                    };
+                    result = math(number_1, number_2, number_3);
+                    Console.WriteLine(result);
+                    break;
+                case "5":
+                    Console.Clear();
+                    Console.WriteLine("Введите первое число:");
+                    number_1 = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Введите второе число:");
+                    number_2 = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Введите третье число:");
+                    number_3 = Convert.ToInt32(Console.ReadLine());
+                    math = (x, y, z) => (x + y + z) / 3;
+                    result = math(number_1, number_2, number_3);
+                    Console.WriteLine(result);
+                    break;
+            }
+        }
+    }
+}
