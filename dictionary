@@ -1,0 +1,178 @@
+using System;
+using System.Collections.Generic;
+using System.Collections;
+
+namespace menu
+{
+    class teacher
+    {
+        static void Main()
+        {
+
+            bool rgrka = true;
+            while (rgrka)
+            {
+                rgrka = MainMenu();
+            }
+        }
+        public static bool MainMenu()
+        {
+            // Creates and initializes a new SortedList.
+            var list = new Dictionary<int, string>()
+            {
+                { 5, "Tom"},
+                { 3, "Sam"},
+                { 11, "Bob"}
+            };
+            var list1 = new Dictionary<int, string>()
+            {
+                { 3, "Sam"},
+                { 5, "Tom"},
+                { 11, "Bob"}
+            };
+            Console.Clear();
+            Console.WriteLine("Меню");
+            Console.WriteLine("1) add");
+            Console.WriteLine("2) count");
+            Console.WriteLine("3) clear");
+            Console.WriteLine("4) print");
+            Console.WriteLine("5) Contains");
+            Console.WriteLine("6) Equals");
+            Console.WriteLine("7) values");
+            Console.WriteLine("8) Remove");
+            Console.WriteLine("9) GetType");
+            Console.WriteLine("10) keys");
+            Console.Write("\r\nВыберите действие: ");
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    add(list);
+                    return true;
+                case "2":
+                    count(list);
+                    return true;
+                case "3":
+                    clear(list);
+                    return true;
+                case "4":
+                    print(list);
+                    return true;
+                case "5":
+                    Contains(list);
+                    return true;
+                case "6":
+                    Equals(list,list1);
+                    return true;
+                case "7":
+                    values(list);
+                    return true;
+                case "8":
+                    Remove(list);
+                    return true;
+                case "9":
+                    GetType(list);
+                    return true;
+                case "10":
+                    keys(list);
+                    return true;
+                default:
+                    return true;
+
+            }
+        }
+
+        public static void add(IDictionary list)
+        {
+            Console.Clear();
+            Console.WriteLine("Введите ключ, значение");
+            var key = Console.ReadLine();
+            var value = Console.ReadLine();
+            list.Add(key, value);
+            print(list);
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void count(IDictionary list)
+        {
+            Console.Clear();
+            Console.WriteLine(list.Count);
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void clear(IDictionary list)
+        {
+            Console.Clear();
+            list.Clear();
+            Console.WriteLine(list.Count);
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.WriteLine(list.Count);
+            Console.ReadLine();
+        }
+        public static void print(IDictionary list)
+        {
+            Console.Clear();
+            foreach (var element in list.Keys)
+            {
+                Console.WriteLine(element + " friends is " + list[element]);
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void Contains(IDictionary list)
+        {
+            Console.Clear();
+            Console.Write("Введите элемент");
+            Console.WriteLine(list.Contains(Console.ReadLine()));
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void values(IDictionary list)
+        {
+            Console.Clear();
+            ICollection Key = list.Values;
+            foreach (var element in Key)
+            {
+                Console.WriteLine(element);
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+
+        public static void Remove(IDictionary list)
+        {
+            Console.Clear();
+            Console.Write("Введите ключ");
+            string f = Console.ReadLine();
+            list.Remove(f);
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void GetType(IDictionary list)
+        {
+            Console.Clear();
+            Console.WriteLine(list.GetType());
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        
+        public static void Equals(IDictionary list, IDictionary list1)
+        {
+            Console.Clear();
+            Console.WriteLine("Введите ключ, значение");
+            Console.WriteLine(list.Equals(list1));
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void keys(IDictionary list)
+        {
+            Console.Clear();
+            ICollection Key = list.Keys;
+            foreach (var element in Key)
+            {
+                Console.WriteLine(element);
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+    }
+}
