@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+
+namespace menu
+{
+    class teacher
+    {
+        public static void Main()
+        {
+            int i = 0;
+            string line = "(av{a[d}s]sadafds)s";
+            var first = new List<char>{ '{', '[', '(','}', ']', ')' };
+            var second = new List<char>();
+            var list = new Dictionary<char, char>
+            {
+                { ']', '['},
+                { '}', '{'},
+                { ')', '('},
+                { '[', ' '},
+                { '{', ' '},
+                { '(', ' '}
+            };
+            Stack<char> people = new Stack<char>();
+            foreach (var el in line) if (first.Contains(el)) people.Push(el);
+            foreach (var person in people) Console.Write($"{person}\t");
+            Console.WriteLine();
+            while (people.Count>2)
+            {
+                char a = people.Pop();
+                char b = people.Peek();
+                if (b == list[a])
+                {
+                    i += 1;
+                    second.Add(b);
+                    second.Add(list[a]);
+                }
+            }
+            if (i == 0) Console.WriteLine("нет");
+            
+            if (i == 1)
+            {
+                foreach (var el in second) first.Remove(el);
+                foreach (var el in line) if (first.Contains(el)) people.Push(el);
+                while (people.Count>2)
+                {
+                    char a = people.Pop();
+                    char b = people.Peek();
+                    if (b == list[a]) i += 1;
+                }
+                if (i==1) Console.WriteLine("нет");
+                else Console.WriteLine("да");
+            }
+            if ((i == 2)||(i == 3)) Console.WriteLine("да");
+        }
+    }
+}
