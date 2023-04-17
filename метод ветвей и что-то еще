@@ -1,0 +1,195 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+
+namespace ConsoleApplication1
+{
+    internal class Program
+    {
+        public static void Main(string[] args)
+        {
+            int len = 0;
+            int n = 6;
+            int[,] mas =
+            {
+                { 0, 1, 2, 3, 4, 5 },
+                { 1, Int32.MaxValue, 6, 4, 8, 7 },
+                { 2, 6, Int32.MaxValue, 7, 11, 7 },
+                { 3, 4, 7, Int32.MaxValue, 4, 3 },
+                { 4, 8, 11, 4, Int32.MaxValue, 5 },
+                { 5, 7, 7, 3, 5, Int32.MaxValue }
+            };
+            List<int[]> paths = new List<int[]>();
+            // мин в строке
+            int min_row(int j)
+            {
+                int mR = Int32.MaxValue;
+                for (int i = 1; i < mas.GetLength(0); i++)
+                {
+                    if (mas[j, i] < mR) mR = mas[j, i];
+                }
+
+                return mR;
+            }
+            // мин в столбце
+            int min_column(int j)
+            {
+                int mR = Int32.MaxValue;
+                for (int i = 1; i < mas.GetLength(1); i++)
+                {
+                    if (mas[i, j] < mR) mR = mas[i, j];
+                }
+
+                return mR;
+            }
+            // вычетание мин в строке
+            int[,] newMasRow(int mR, int j)
+            {
+                for (int i = 1; i < mas.GetLength(0); i++)
+                {
+                    if (mas[j, i] != Int32.MaxValue) mas[j, i] -= mR;
+                }
+
+                return mas;
+            }
+            // вычитание мин в столбце
+            int[,] newMasColumn(int mR, int j)
+            {
+                for (int i = 1; i < mas.GetLength(1); i++)
+                {
+                    if (mas[i, j] != Int32.MaxValue) mas[i, j] -= mR;
+                }
+
+                return mas;
+            }
+            // вывод массива
+            void print(int[,] m)
+            {
+                for (int i = 0; i<m.GetLength(0);i++)
+                {
+                    for (int j =0; j<m.GetLength(1); j++)
+                    {
+                        if (m[i, j] == Int32.MaxValue) Console.Write("++\t");
+                        else Console.Write($"{m[i,j]} \t");
+                    }
+                    Console.WriteLine();
+                }
+            }
+            // нахождение степени нуля
+            int degree(int i, int j)
+            {
+                int mR = Int32.MaxValue;
+                int mC = Int32.MaxValue;
+                for (int k = 1; k < mas.GetLength(0); k++)
+                {
+                    if (k != j)
+                        if (mR > mas[i, k])
+                            mR = mas[i, k];
+                    if (k != i)
+                        if (mC > mas[k, j])
+                            mC = mas[k, j];
+
+                }
+
+                return mC + mR;
+            }
+
+            int[,] short_mas(int[,]mass ,int[] coord)
+            {
+                int[,] mas1 = new int[mass.GetLength(0)-1, mass.GetLength(1)-1];
+                List<int> num = new List<int>();
+                for (int i = 0; i < mass.GetLength(0); i++) for (int j = 0; j < mass.GetLength(1); j++) if (i != coord[0] && j != coord[1]) num.Add(mass[i,j]);
+                for (int i = 0; i < mas1.GetLength(0); i++) for (int j = 0; j < mas1.GetLength(1); j++) mas1[i, j] = num[i*mas1.GetLength(0)+j];
+                return mas1;
+            }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            while (mas.GetLength(0) > 3)
+            {
+                // вычитание мин в строке и столбце
+            for (int i = 1; i < mas.GetLength(0); i++)
+            {
+                len += min_row(i);
+                mas = newMasRow(min_row(i), i);
+            }
+            print(mas);
+
+            Console.WriteLine($"Дистанция - {len}");
+            Console.WriteLine();
+
+            for (int i = 1; i < mas.GetLength(1); i++)
+            {
+                len += min_column(i);
+                mas = newMasColumn(min_column(i), i);
+            }
+            print(mas);
+
+            Console.WriteLine($"Дистанция - {len}");
+            
+            
+            //создание словаря нуль-степень
+            Dictionary<int[], int> zero = new Dictionary<int[], int>();
+            for (int i = 1; i < mas.GetLength(0); i++)
+            {
+                for (int j = 1; j < mas.GetLength(1); j++)
+                {
+                    if (mas[i, j] == 0)
+                    {
+                        int[] a = { i, j };
+                        zero.Add(a, degree(i,j));
+                    }
+                }
+            }
+
+            //вывод максимальной степени
+            int max_degree = zero.Values.ToArray().Max();
+            Console.WriteLine($"Максимальная степень нуля\t{max_degree}");
+            
+            //вывод всех нуль-степеней
+            foreach (var el in zero.Keys)
+            {
+                Console.WriteLine($"{el[0]},{el[1]} - {zero[el]}");
+            }
+            //получение координат макс степени
+            int[] array1=new int[2];
+            foreach (var el in zero.Keys)
+                if (zero[el] == max_degree)
+                {
+                    array1 = el.ToArray();
+                    break;
+                }
+            mas[array1[1],array1[0]]=Int32.MaxValue;
+            //вывод координат макс степени
+            Console.Write("координаты макс степени\t");
+            foreach (var number in array1) Console.Write($"{number}\t");
+            Console.WriteLine();
+            Console.WriteLine();
+            
+            int[] peaks = {mas[0,array1[1]], mas[array1[0],0]};
+            paths.Add(peaks);
+            
+            int[,] shr_mas = short_mas(mas, array1);
+            //mas = new int[shr_mas.GetLength(0),shr_mas.GetLength(1)];
+            mas = shr_mas;
+            print(mas);
+            }
+            Console.WriteLine(len);
+            for (int i = 1; i < mas.GetLength(0); i++)
+            {
+                for (int j = 1; j < mas.GetLength(0); j++)
+                {
+                    if (mas[i, j] != Int32.MaxValue)
+                    {
+                        int[] peaks = {mas[0,j], mas[i,0]};
+                        paths.Add(peaks);
+                    }
+                }
+            }
+
+            for (int i = 0; i < paths.Count; i++)
+            {
+                Console.Write($"{paths[i][0]},{paths[i][1]}\t");
+            }
+        }
+    }
+}
