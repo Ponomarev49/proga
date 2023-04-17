@@ -1,0 +1,94 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+delegate void MyEventHandler(int a, int b);
+class MyEvent
+{
+    MyEventHandler[] evnt = new MyEventHandler[4];
+    public event MyEventHandler SomeEvent
+    {
+        // Добавить событие в список.
+        add
+        {
+            int i;
+            for (i = 0; i < 4; i++)
+                if (evnt[i] == null)
+                {
+                    evnt[i] = value;
+                    break;
+                }
+            if (i == 4) Console.WriteLine("Список событий заполнен.");
+        }
+        remove
+        {
+            int i;
+            for (i = 0; i < 4; i++)
+                if (evnt[i] == value)
+                {
+                    evnt[i] = null;
+                    break;
+                }
+            if (i == 4) Console.WriteLine("Обработчик событий не найден.");
+        }
+    }
+    public void Events(int a, int b)
+    {
+        for (int i = 0; i < 4; i++)
+            if (evnt[i] != null) evnt[i](a,b);
+    }
+}
+class sum
+{
+    public void plus(int a, int b)
+    {
+        Console.WriteLine($"Сумма = {a+b}");
+    }
+}
+class dif
+{
+    public void minus(int a, int b)
+    {
+        Console.WriteLine($"Разность = {a-b}");
+    }
+}
+class proiz
+{
+    public void ymnoz(int a, int b)
+    {
+        Console.WriteLine($"Умножение = {a*b}");
+    }
+}
+class del
+{
+    public void div(int a, int b)
+    {
+        if (b == 0) Console.WriteLine("Нет");
+        else {
+            Console.WriteLine($"Деление = {a/b}");
+        }
+    }
+}
+class Event
+{
+    static void Main()
+    {
+        Console.WriteLine("Введите 2 числа");
+        int a = Convert.ToInt32(Console.ReadLine());
+        int b = Convert.ToInt32(Console.ReadLine());
+        MyEvent evt = new MyEvent();
+        sum go = new sum();
+        dif go1 = new dif();
+        proiz go2 = new proiz();
+        del go3 = new del();
+
+        // Добавить обработчики в цепочку событий.
+        evt.SomeEvent += go.plus;
+        evt.SomeEvent += go1.minus;
+        evt.SomeEvent += go2.ymnoz;
+        evt.SomeEvent += go3.div;
+        Console.WriteLine();
+        evt.Events(a,b);
+        Console.WriteLine();
+        Console.ReadLine();
+    }
+}
