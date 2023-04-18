@@ -1,0 +1,32 @@
+for n in range(1, 11):
+    f = open(f'Зельеварение/input{n}.txt', 'r')
+    l = open(f'Зельеварение/output{n}.txt', 'r')
+
+    potions = {}
+
+    f1 = f.readlines()
+    l1 = l.readlines()
+    
+    for i in range(len(f1)):
+        f1[i] = f1[i].replace('\n', '')
+        
+    for i in range(0, len(f1), 1):
+        f1[i] = f1[i].split(" ")
+        if f1[i][0] == "DUST":
+            f1[i][0] = "DT_TD"
+        if f1[i][0] == "WATER":
+            f1[i][0] = "WT_TW"
+        if f1[i][0] == "FIRE":
+            f1[i][0] = "FR_RF"
+        if f1[i][0] == "MIX":
+            f1[i][0] = "MX_XM"
+        potion = f1[i][0]
+        f1[i].pop(0)
+        for j in range(len(f1[i])):
+            if f1[i][j] in potions.keys():
+                f1[i][j] = potions[f1[i][j]]
+        potion = potion.replace("_", "".join(f1[i]))
+        potions[f'{i + 1}'] = potion
+        
+    if potion == l1[0]:
+        print("True")
