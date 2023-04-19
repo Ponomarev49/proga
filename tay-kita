@@ -1,0 +1,26 @@
+for n in range(1, 10):
+    f = open(f'Тау-Кита/input_s1_0{n}.txt', 'r')
+    l = open(f'Тау-Кита/output_s1_0{n}.txt', 'r')
+
+    f1 = f.readlines()
+    l1 = l.readlines()
+
+    words = f1[0]
+    words = words.split(" ")
+    
+    for k in range(len(words)):
+        new_word = words[k][len(words[k]) // 2]
+        for i in range(1, len(words[k]) // 2 + 1):
+            new_word += words[k][len(words[k]) // 2 - i]
+            if (len(words[k]) // 2 + i) < len(words[k]):
+                new_word += words[k][len(words[k]) // 2 + i]
+        words[k] = new_word
+        
+    new_words = [words[len(words) // 2]]
+    for i in range(1, len(words) // 2 + 1):
+        new_words.append(words[len(words) // 2 - i])
+        if (len(words) // 2 + i) < len(words):
+            new_words.append(words[len(words) // 2 + i])
+            
+    if (' '.join(new_words)) == l1[0]:
+        print("True")
