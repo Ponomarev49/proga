@@ -1,13 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 delegate void MyEventHandler(int a, int b);
 class MyEvent
 {
     MyEventHandler[] evnt = new MyEventHandler[4];
     public event MyEventHandler SomeEvent
     {
-        // Добавить событие в список.
         add
         {
             int i;
@@ -37,29 +33,20 @@ class MyEvent
             if (evnt[i] != null) evnt[i](a,b);
     }
 }
-class sum
+class math
 {
     public void plus(int a, int b)
     {
         Console.WriteLine($"Сумма = {a+b}");
     }
-}
-class dif
-{
     public void minus(int a, int b)
     {
         Console.WriteLine($"Разность = {a-b}");
     }
-}
-class proiz
-{
     public void ymnoz(int a, int b)
     {
         Console.WriteLine($"Умножение = {a*b}");
     }
-}
-class del
-{
     public void div(int a, int b)
     {
         if (b == 0) Console.WriteLine("Нет");
@@ -76,12 +63,11 @@ class Event
         int a = Convert.ToInt32(Console.ReadLine());
         int b = Convert.ToInt32(Console.ReadLine());
         MyEvent evt = new MyEvent();
-        sum go = new sum();
-        dif go1 = new dif();
-        proiz go2 = new proiz();
-        del go3 = new del();
-
-        // Добавить обработчики в цепочку событий.
+        math go = new math();
+        math go1 = new math();
+        math go2 = new math();
+        math go3 = new math();
+        
         evt.SomeEvent += go.plus;
         evt.SomeEvent += go1.minus;
         evt.SomeEvent += go2.ymnoz;
