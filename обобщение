@@ -1,0 +1,50 @@
+namespace menu
+{
+    class teacher
+    {
+        static void Main()
+        {
+            Mas<int> num = new Mas<int>();
+            num.Add(3);
+            num.Add(2);
+            num.Add(1);
+            num.Add(4);
+            num.Remove(1);
+            num.GetItem(1);
+        }
+    }
+    class Mas<T>
+    {
+        T[] massiv = new T[0];
+        public void Add(T item)
+        {
+            T[] newMas = new T[massiv.Length + 1];
+            for(int i = 0; i < massiv.Length; i++) newMas[i] = massiv[i];
+            newMas[massiv.Length] = item;
+            massiv = newMas;
+        }
+        public void Remove(int item)
+        {
+            if (0 <= item && item <= massiv.Length - 1)
+            {
+                T[] newMas = new T[massiv.Length - 1];
+                int j = 0;
+                for (int i = 0; i < massiv.Length; i++)
+                {
+                    if (i != item)
+                    {
+                        newMas[j] = massiv[i];
+                        j++;
+                    }
+                }
+                massiv = newMas;
+            }
+            else Console.WriteLine("нет элемента с таким индексом");
+        }
+        public void  GetItem(int item)
+        {
+            if (0<=item && item < massiv.Length) Console.WriteLine(massiv[item]);
+            else Console.WriteLine("нет элемента с таким индексом");
+        }
+    }
+}
