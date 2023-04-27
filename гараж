@@ -1,0 +1,61 @@
+namespace menu
+{
+    class teacher
+    {
+        delegate object Moy(object car);
+
+        public static void Main()
+        {
+            
+            garage garage = new garage();
+            car lambo = new car("lamborgini", "red", 231);
+            garage.Add(lambo.Name);
+            car fera = new car("ferrari", "blue", 105);
+            car lada = new car("lada", "white", 231);
+            garage.Add(lada.Name);
+            garage.go_moy();
+            
+        }
+
+        class car
+        {
+            public string Name;
+            public string Colour;
+            public int Num;
+
+            public car(string name, string colour, int num)
+            {
+                Name = name;
+                Colour = colour;
+                Num = num;
+            }
+        }
+
+        class garage
+        {
+            List<object> gar = new List<object>();
+            public void Add(string item)
+            {
+                
+                gar.Add(item);
+            }
+            public void go_moy()
+            {
+                foreach (object car in gar)
+                {
+                    Moy moy;
+                    moy = (x)=> wash.moyka(x);
+                    Console.WriteLine(moy(car));
+                }
+            }
+        }
+        class wash
+        {
+            public static string moyka(object a)
+            {
+                return($"{a} помыта");
+            }
+
+        }
+    }
+}
