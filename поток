@@ -1,0 +1,34 @@
+import networkx as nx
+
+f = open("dano")
+f1 = f.readlines()
+for i in range(len(f1)):
+    f1[i] = f1[i].replace('\n', '')
+    f1[i] = f1[i].split(' ')
+    f1[i][-1] = int(f1[i][-1])
+G = nx.DiGraph()
+G.add_weighted_edges_from(f1)
+
+true = "true"
+otv = 0
+while true:
+    check = 0
+    try:
+        route = nx.dijkstra_path(G, '1', '8')
+    except:
+        print(otv)
+        break
+    leng = []
+    for i in range(1, len(route)):
+        leng.append(G[route[i - 1]][route[i]]['weight'])
+    minimum = min(leng)
+    for i in range(1, len(route)):
+        if G[route[i - 1]][route[i]]['weight'] - minimum != 0:
+            G[route[i - 1]][route[i]]['weight'] -= minimum
+        else:
+            check = 1
+            a = route[i - 1]
+            b = route[i]
+    if check == 1:
+        G.remove_edge(a, b)
+    otv += minimum
