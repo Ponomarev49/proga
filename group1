@@ -1,0 +1,61 @@
+namespace ConsoleApplication6
+{
+    public class Car
+    {
+        public string Name;
+        public int Id;
+        public Car(string name,  int id)
+        {
+            Name = name;
+            Id = id;
+        }
+    }
+    public class Driver
+    {
+        public string name;
+        public int CarId;
+        public Driver(string fio, int id)
+        {
+            name = fio;
+            CarId = id;  
+        }
+    }
+    class MainProgram
+    {
+        public static void Main()
+        {
+            Car car = new Car("lamborgini", 1);
+            Car car1 = new Car("renault", 2);
+            Car car2 = new Car("mercedes", 3);
+            Driver people = new Driver("sergey", 1);
+            Driver people1 = new Driver("anton", 2);
+            Driver people3 = new Driver("anton", 3);
+            Driver people2 = new Driver("ivan", 3);
+            List <Driver> Drivers = new List<Driver>();
+            List <Car> Cars = new List<Car>();
+            Drivers.Add(people);
+            Drivers.Add(people1);
+            Drivers.Add(people2);
+            Drivers.Add(people3);
+            Cars.Add(car);
+            Cars.Add(car1);
+            Cars.Add(car2);
+            Console.WriteLine("Введите букву");
+            char subject = Convert.ToChar(Console.ReadLine());
+            var sort = Drivers.GroupBy(p => p.CarId);
+            foreach(var company in sort)
+            {
+                Console.WriteLine(Cars[company.Key-1].Name);
+ 
+                foreach(var person in company)
+                {
+                    Console.WriteLine(person.name);
+                }
+                Console.WriteLine();
+            }
+            var selectedPeople = Drivers.Where(p => p.name[0] == subject);
+            foreach (var person in selectedPeople)
+                Console.WriteLine(person.name);
+        }
+    }
+}
