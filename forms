@@ -1,0 +1,162 @@
+import numpy as np
+
+
+def rever(a):
+    for _ in range(len(a)):
+        a[_] = list(reversed(a[_]))
+    return a
+
+
+def key(mas):
+    for ki in forms.keys():
+        if forms[ki] == mas:
+            del forms[ki]
+            break
+    return ki
+
+
+for n in range(7, 8):
+    f = open(f"input{n}.txt").readlines()
+    l = open(f'output{n}.txt').readlines()
+    details = []
+    forms = {}
+    for i in range(len(f)):
+        f[i] = f[i].replace('\n', '')
+        f[i] = f[i].split(' ')
+    for i in range(len(l)):
+        l[i] = l[i].replace('\n', '')
+        l[i] = l[i].split(' ')
+        for j in range(len(l[i])):
+            l[i][j] = int(l[i][j])
+    details = f[1:int(f[0][0]) + 1]
+    for i in range(len(details)):
+        details[i] = np.array(details[i]).reshape(4, 5).tolist()
+    forma = f[int(f[0][0]) + 1::]
+    forms = {}
+    for i in range(len(forma)):
+        forms[i + 1] = np.array(forma[i]).reshape(3, 5).tolist()
+
+    otv = []
+    for i in range(len(details)):
+        z = 0
+        for form in (forms.values()):
+            z += 1
+            if details[i][0] == form[0] and details[i][1] == form[1] and details[i][2] == form[2]:
+                found = [details[i][0], details[i][3], details[i][2]]
+                raw = key(form)
+                if found in forms.values():
+                    otv += [[raw, key(found)]]
+                    print(raw, key(found))
+                    break
+                else:
+                    rev = rever(found)
+                    if rev in forms.values():
+                        otv += [sorted([raw, key(found)])]
+                        print(raw, key(found))
+                        break
+            elif details[i][0] == form[0] and details[i][3] == form[1] and details[i][2] == form[2]:
+                found = [details[i][0], details[i][1], details[i][2]]
+                raw = key(form)
+                if found in forms.values():
+                    otv += [[raw, key(found)]]
+                    print(raw, key(found))
+                    break
+                else:
+                    rev = rever(found)
+                    if rev in forms.values():
+                        otv += [sorted([raw, key(found)])]
+                        print(raw, key(found))
+                        break
+            elif details[i][3] == form[0] and details[i][0] == form[1] and details[i][1] == form[2]:
+                found = [details[i][3], details[i][2], details[i][1]]
+                raw = key(form)
+                if found in forms.values():
+                    otv += [[raw, key(found)]]
+                    print(raw, key(found))
+                    break
+                else:
+                    rev = rever(found)
+                    if rev in forms.values():
+                        otv += [sorted([raw, key(found)])]
+                        print(raw, key(found))
+                        break
+            elif details[i][3] == form[0] and details[i][2] == form[1] and details[i][1] == form[2]:
+                found = [details[i][3], details[i][0], details[i][1]]
+                raw = key(form)
+                if found in forms.values():
+                    otv += [[raw, key(found)]]
+                    print(raw, key(found))
+                    break
+                else:
+                    rev = rever(found)
+                    if rev in forms.values():
+                        otv += [sorted([raw, key(found)])]
+                        print(raw, key(found))
+                        break
+            elif details[i][2] == form[0] and details[i][1] == form[1] and details[i][0] == form[2]:
+                found = [details[i][2], details[i][3], details[i][0]]
+                raw = key(form)
+                if found in forms.values():
+                    otv += [[raw, key(found)]]
+                    print(raw, key(found))
+                    break
+                else:
+                    rev = rever(found)
+                    if rev in forms.values():
+                        otv += [sorted([raw, key(found)])]
+                        print(raw, key(found))
+                        break
+            elif details[i][2] == form[0] and details[i][1] == form[1] and details[i][0] == form[2]:
+                found = [details[i][2], details[i][3], details[i][0]]
+                raw = key(form)
+                if found in forms.values():
+                    otv += [[raw, key(found)]]
+                    print(raw, key(found))
+                    break
+                else:
+                    rev = rever(found)
+                    if rev in forms.values():
+                        otv += [sorted([raw, key(found)])]
+                        print(raw, key(found))
+                        break
+                found = [details[i][3], details[i][0], details[i][1]]
+                if found in forms.values():
+                    otv += [[raw, key(found)]]
+                    print(raw, key(found))
+                    break
+                else:
+                    rev = rever(found)
+                    if rev in forms.values():
+                        otv += [sorted([raw, key(found)])]
+                        print(raw, key(found))
+                        break
+
+            elif details[i][1] == list(reversed(form[0])) and details[i][2] == list(reversed(form[1])) and details[i][3] == list(reversed(form[2])):
+                found = [list(reversed(details[i][3])), list(reversed(details[i][0])), list(reversed(details[i][1]))]
+                raw = key(form)
+                if found in forms.values():
+                    otv += [[raw, key(found)]]
+                    print(raw, key(found))
+                    break
+                else:
+                    rev = rever(found)
+                    if rev in forms.values():
+                        otv += [sorted([raw, key(found)])]
+                        print(raw, key(found))
+                        break
+                found = [details[i][1], details[i][0], details[i][3]]
+                if found in forms.values():
+                    otv += [[raw, key(found)]]
+                    print(raw, key(found))
+                    break
+                else:
+                    rev = rever(found)
+                    if rev in forms.values():
+                        otv += [sorted([raw, key(found)])]
+                        print(raw, key(found))
+                        break
+
+    if otv == l:
+        print(f'{n}-true')
+    else:
+        print(f'{n}-false {otv}')
